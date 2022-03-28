@@ -1,11 +1,28 @@
-import React from 'react'
-
-import PropTypes from 'prop-types';
+import React, {useState, useEffect} from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-
 import styles from './Content.module.css';
 
-export default function Content() {
+const key = process.env.REACT_APP_DARK_SKY_API_KEY
+
+export default function Content({ location }) {
+  const [ city, setCity ] = useState({lat: null, lon: null})
+  const [ result, setResult ] = useState({})
+
+  useEffect(() => {
+    setCity({lat: location.lat, lon: location.lon})
+  }, [location])
+
+  useEffect(() => {
+    if (city.lon !== null) {
+        fetch(`/forecast/${key}/${city.lat},${city.lon}`)
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            setResult(res)
+        }).catch(error => console.log(error))
+    }
+  }, [city])
+
   return (
     <Container className={styles.box}>
       <Row>
