@@ -41,6 +41,15 @@ export default function Content({ location }) {
             </div>
           </Col>
       </Row>
+      {result.currently ? (
+        <>
+            <p>Location: {result.currently.summary}</p>
+            <p>Temp: {result.currently.temperature}°</p>
+            <p>humidity: {result.currently.humidity}</p>
+            <p>Wind Speed: {result.currently.windSpeed}mph</p>
+        </>
+        ) : <p>No data to display</p>
+        } 
   </Container>
   )
 }
