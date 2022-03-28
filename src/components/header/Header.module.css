@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+}
+
+.leftHeading {
+  padding: 2rem;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+.rightHeading {
+  padding: 2rem;
+  position: Absolute;
+  top: 20px;
+  right: 0px;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.light {
+  font-weight: 100;
+}
