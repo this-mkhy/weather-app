@@ -1,3 +1,14 @@
+## Weather App
+A minimalistic weather web application that displays the current temperature based on user location.
+
+## Technologies
+* ReactJs
+* Weatherstack API
+* CSS Modules
+
+## Live Preview
+[Weather App](https://instaweather22.netlify.app/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
