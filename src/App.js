@@ -53,8 +53,8 @@ const App = () => {
   return (
     <div className="App">
        <Header />
-       <Content />
-       <Footer />
+       <Content {...weatherData}/>
+       <Footer {...weatherData}/>
     </div>
   );
 }

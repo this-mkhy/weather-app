@@ -1,55 +1,30 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from './Content.module.css';
 
-const key = process.env.REACT_APP_DARK_SKY_API_KEY
+//const key = process.env.REACT_APP_DARK_SKY_API_KEY
 
-export default function Content({ location }) {
-  const [ city, setCity ] = useState({lat: null, lon: null})
-  const [ result, setResult ] = useState({})
-
-  useEffect(() => {
-    setCity({lat: location.lat, lon: location.lon})
-  }, [location])
-
-  useEffect(() => {
-    if (city.lon !== null) {
-        fetch(`/forecast/${key}/${city.lat},${city.lon}`)
-        .then(res => res.json())
-        .then(res => {
-            console.log(res)
-            setResult(res)
-        }).catch(error => console.log(error))
-    }
-  }, [city])
+export default function Content({temperature, description, img, region, country}) {
+  console.log('hello temperature', temperature)
 
   return (
     <Container className={styles.box}>
       <Row>
-          <Col xs={12} md={4}>
+          <Col xs={12} md={9}>
               <div className={styles.card}>
-                <h2>City</h2>
-                <p>Friday 20,2020</p>
-                <span>Cloud Icon</span>
+                <h2>{region} | {country}</h2>
+                <p>{new Date().toLocaleDateString()}</p>
+                <img src={img} alt="weather" className="ml-md-5" />
               </div>
           </Col>
-          <Col xs={12} md={8} className="d-flex flex-column justify-content-between">
+          <Col xs={12} md={3} className="d-flex flex-column justify-content-between">
             <div className={styles.card}>
-              <h2>Weather, 72 C</h2>
-              <p>81 deg / 63 deg</p>
-              <span>Cloud throught the day</span>
+              <h2>Weather, {temperature} <sup>o</sup></h2>
+              <p>{description}</p>
+
             </div>
           </Col>
       </Row>
-      {result.currently ? (
-        <>
-            <p>Location: {result.currently.summary}</p>
-            <p>Temp: {result.currently.temperature}°</p>
-            <p>humidity: {result.currently.humidity}</p>
-            <p>Wind Speed: {result.currently.windSpeed}mph</p>
-        </>
-        ) : <p>No data to display</p>
-        } 
   </Container>
   )
 }
