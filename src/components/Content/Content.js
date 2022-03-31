@@ -19,7 +19,8 @@ export default function Content({temperature, description, img, region, country}
           </Col>
           <Col xs={12} md={3} className="d-flex flex-column justify-content-between">
             <div className={styles.card}>
-              <h2>Weather, {temperature} <sup>o</sup></h2>
+              <h2>Weather</h2>
+              <h1 className={styles.degree}> {temperature} <sup>o</sup></h1>
               <p>{description}</p>
 
             </div>

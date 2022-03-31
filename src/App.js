@@ -5,6 +5,7 @@ import Content from './components/Content/Content';
 import Footer from './components/footer/Footer';
 
 import {getWeatherData} from './api/getWeatherData'
+import styles from './App.module.css';
 
 const App = () => {
   console.log("getWeatherData", {getWeatherData});
@@ -14,6 +15,26 @@ const App = () => {
     latitude: 30.083,
     longitude: 31.283,
   });
+
+  // Celsius to Fahrenheit
+  // Celsius = (Celsius − 32) × 5/9
+  // Fahrenheit = Celsius * 9/5 + 32
+  const convertWeather = (type = "Cels") => {
+    let FahrenheitDegree = 0;
+    let CelsiusDegree = 0;
+    if (weatherData.temperature) {
+      if (type === "Cels") {
+        CelsiusDegree = ((weatherData.temperature * 9) / 5 + 32).toFixed(0);
+        setWeatherData({ ...weatherData, temperature: CelsiusDegree });
+        CelsiusDegree = 0;
+
+      } else {
+        FahrenheitDegree = ((weatherData.temperature - 32) * (5 / 9)).toFixed(0);
+        setWeatherData({ ...weatherData, temperature: FahrenheitDegree });
+        FahrenheitDegree = 0;
+      }
+    } 
+  };
 
   useEffect(() => {
     //coordinates will be the coordinates of user locate
@@ -51,8 +72,8 @@ const App = () => {
 
 
   return (
-    <div className="App">
-       <Header />
+    <div className={styles.App}>
+       <Header currentTemp={weatherData.temperature} convertWeather={convertWeather}/>
        <Content {...weatherData}/>
        <Footer {...weatherData}/>
     </div>
